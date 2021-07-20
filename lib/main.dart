@@ -4,6 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:testcamera/AppUtil.dart';
+import 'package:testcamera/Screens/DisplayPictureScreen.dart';
+import 'package:testcamera/Screens/GalleryScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +59,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         actions: [
           IconButton(
             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GalleryScreen(),
+                ),
+              );
             },
             icon: Icon(Icons.photo_album),
           ),
@@ -135,21 +143,5 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
     } catch (e) {
       print(e);
     }
-  }
-}
-
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-  const DisplayPictureScreen({Key? key, required this.imagePath})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Preview'),
-      ),
-      body: Image.file(File(imagePath)),
-    );
   }
 }
